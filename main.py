@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 import os
 from time import time, sleep
 
@@ -29,5 +30,10 @@ pass_text.send_keys(PASSWORD)
 
 submit = driver.find_element(By.CSS_SELECTOR, ".login__form_action_container button")
 submit.click()
+
+sleep(3)
+
+search_box = driver.find_element(By.XPATH, value='//*[@id="jobs-search-box-keyword-id-ember213"]')
+search_box.send_keys("Python Developer", Keys.ENTER)
 
 
