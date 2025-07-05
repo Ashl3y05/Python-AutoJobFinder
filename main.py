@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as ec
 import selenium.common.exceptions
 
 import os
@@ -41,14 +43,13 @@ search_box.send_keys("Python Developer", Keys.ENTER)
 sleep(2)
 
 jobs = driver.find_elements(By.CLASS_NAME, 'eXpUlPeraWOMWeQsOLgQAYzhjWpNMjOpAHpxA')
-save_job = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div[2]/div/div[2]/div/div[2]/div[1]/div/div[1]/div/div[1]/div/div[6]/div/button')
 
 for item in jobs:
     item.click()
     sleep(1)
     try:
-        save_job.click()
-    except selenium.common.StaleElementReferenceException:
-        print("Error")
+        driver.find_element(By.CLASS_NAME, "jobs-save-button").click()
+    except selenium.common.StaleElementReferenceException as message:
+        print(f"Error: {message}")
 
 
